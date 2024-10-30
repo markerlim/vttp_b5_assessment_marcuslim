@@ -17,7 +17,7 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 
-		String filename = "task01/day.csv";
+		String filename = "day.csv";
 		File file = new File(filename);
 		if (!file.exists()) {
 			System.out.println("File does not exist");
