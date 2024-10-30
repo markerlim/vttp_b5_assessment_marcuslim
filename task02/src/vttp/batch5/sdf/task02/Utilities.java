@@ -13,46 +13,6 @@ public class Utilities {
         return line.trim();
     }
 
-    public int minimax(String[][] board, String player) {
-        if (hasWon(board, "O")) {
-            return -1;
-        }
-        if (hasWon(board, "X")) {
-            return 1;
-        }
-        if(!hasWon(board, "X") && !hasWon(board, "O")){
-            return 0;
-        }
-
-        if (player.equals("X")) {
-            int best = Integer.MIN_VALUE;
-            for (int i = 0; i < 3; i++) {
-                for (int j = 0; i < 3; j++) {
-                    if (board[i][j].equals(".")) {
-                        board[i][j] = "X";
-                        best = Math.max(best, minimax(board, "O"));
-                        board[i][j] = ".";
-                    }
-                }
-            }
-            return best;
-
-        } else {
-            int best = Integer.MAX_VALUE;
-            for (int i = 0; i < 3; i++) {
-                for (int j = 0; j < 3; j++) {
-                    if (board[i][j].equals(".")) {
-                        board[i][j] = "O";
-                        best = Math.min(best, minimax(board, "X"));
-                        board[i][j] = ".";
-                    }
-                }
-            }
-            return best;
-        }
-
-    }
-
     public static boolean hasWon(String[][] board, String player) {
         for (int i = 0; i < 3; i++) {
             if (board[i][0].equals(player) && board[i][1].equals(player) && board[i][2].equals(player)) {
