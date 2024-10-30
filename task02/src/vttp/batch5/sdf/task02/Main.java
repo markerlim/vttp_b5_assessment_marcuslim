@@ -6,8 +6,6 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
 
 public class Main {
 
@@ -22,6 +20,7 @@ public class Main {
 		File file = new File(filename);
 		if (!file.exists()) {
 			System.out.println("File does not exist");
+			System.exit(1);
 		}
 
 		Reader reader = new FileReader(file);
@@ -47,8 +46,10 @@ public class Main {
 			count++;
 		}
 		br.close();
-		System.out.println("Processing: "+args[0]);
+		System.out.println("Processing: "+args[0]+"\n");
+		System.out.println("Board:\n");
 		System.out.println(Utilities.printformat(board));
+		System.out.println("-----------------------------");
 		for (String emp : empty) {
             String[] values = emp.split(",");
             int row = Integer.parseInt(values[0]);
@@ -64,8 +65,6 @@ public class Main {
 			board[row][col] = ".";
 
 			System.out.printf("y=%d, x=%d, utility=%d\n",row,col,utility);
-
-
 		}
 	}
 }
