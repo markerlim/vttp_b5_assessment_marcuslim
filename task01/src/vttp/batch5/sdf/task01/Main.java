@@ -17,12 +17,7 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 
-		if (args.length == 0) {
-			System.out.println("Error no filename provided");
-			System.exit(1);
-		}
-
-		String filename = args[0];
+		String filename = "task01/day.csv";
 		File file = new File(filename);
 		if (!file.exists()) {
 			System.out.println("File does not exist");
@@ -42,6 +37,7 @@ public class Main {
 			String[] data = input.split(",");
 			lbe.add(BikeEntry.toBikeEntry(data));
 		}
+		br.close();
 		List<BikeEntry> result = lbe.stream().sorted(Comparator.comparing(BikeEntry::getRegistered).reversed())
 				.toList();
 		for (int i = 0; i < 5; i++) {
@@ -73,17 +69,19 @@ public class Main {
 			if(holder.getWeather() == 4) {
 				weather = "Heavy Rain + Ice Pallets + Thunderstorm + Mist, Snow + Fog";
 			}
-
-			System.out.printf("The %s recorded number of cyclists was in %s, on a %s in the month of %s.\n", position,
-					Utilities.toSeason(holder.getSeason()), Utilities.toWeekday(holder.getWeekday()),
-					Utilities.toMonth(holder.getMonth()));
-			System.out.printf("There was a total of %d cyclist. The weather was %s.\n", holder.getRegistered(),
-					weather);
+			String line = "The <position> recorded number of cyclists was in <season>, on a <day> in the month of <month>.\nThere was a total of <total> cyclists. The weather was <weather>.\n<day> was <holiday>.";
+			line = line.replace("<position>",position + " " +"(position)");
+			line = line.replace("<season>",Utilities.toSeason(holder.getSeason()) + " " +"(season)");
+			line = line.replace("<day>",Utilities.toWeekday(holder.getWeekday()) + " " +"(day)");
+			line = line.replace("<month>",Utilities.toMonth(holder.getMonth()) + " " +"(month)");
+			line = line.replace("<total>",holder.getRegistered() + " " +"(total)");
+			line = line.replace("<weather>",weather + " " + "(weather)");
 			if (result.get(i).isHoliday()) {
-				System.out.printf("%s was not a holiday.\n", Utilities.toWeekday(holder.getWeekday()));
+				line = line.replace("<holiday>","a holiday");
 			} else {
-				System.out.printf("%s was a holiday.\n", Utilities.toWeekday(holder.getWeekday()));
+				line = line.replace("<holiday>","not a holiday");
 			}
+			System.out.println(line);
 			System.out.println("");
 		}
 
