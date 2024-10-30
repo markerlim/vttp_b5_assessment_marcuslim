@@ -16,7 +16,7 @@ public class Main {
 			System.exit(1);
 		}
 
-		String filename = "task02/" + args[0];
+		String filename = args[0];
 		File file = new File(filename);
 		if (!file.exists()) {
 			System.out.println("File does not exist");
@@ -46,7 +46,7 @@ public class Main {
 			count++;
 		}
 		br.close();
-		System.out.println("Processing: "+args[0]+"\n");
+		System.out.println("Processing: "+filename+"\n");
 		System.out.println("Board:\n");
 		System.out.println(Utilities.printformat(board));
 		System.out.println("-----------------------------");
